@@ -14,6 +14,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 COPY ./html /var/www/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 443
+EXPOSE 443 80
 
 CMD ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"]
