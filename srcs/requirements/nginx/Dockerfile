@@ -11,7 +11,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -out /etc/nginx/ssl/nginx.crt \
 -subj "/C=DE/ST=Baden-Wurttemberg/L=Heilbronn/O=42/OU=Student/CN=adrherna.42.fr"
 
-COPY ./html /var/www/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 443 80

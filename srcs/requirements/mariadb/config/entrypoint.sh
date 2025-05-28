@@ -13,6 +13,7 @@ done
 # Run the init script
 /init.sh
 
-echo "Init script finished"
 # Keep MariaDB running in foreground
 wait
+
+echo "Init script finished"
