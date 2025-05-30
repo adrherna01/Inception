@@ -41,7 +41,9 @@ if [ ! -f wp-config.php ]; then
 
   echo "block 6"
   # Filesystem method (like Script 1)
+  
   ./wp-cli.phar config set FS_METHOD direct --allow-root
+  ./wp-cli.phar plugin update --all --allow-root
 
   echo "WordPress installation complete with default setup."
 else

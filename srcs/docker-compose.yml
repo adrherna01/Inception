@@ -63,7 +63,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/adrherna/42/inception/srcs/data/db
+      device: /Users/adrherna/Desktop/Ince_git/srcs/data/db
 
   wp_data:
     name: "wp_volume"
@@ -71,7 +71,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/adrherna/42/inception/srcs/data/wp
+      device: /Users/adrherna/Desktop/Ince_git/srcs/data/wp
 
 networks:
   inception:
