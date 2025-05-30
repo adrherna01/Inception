@@ -8,11 +8,17 @@ all: up
 
 # Start the services
 up:
+	mkdir -p ../data/db
+	mkdir -p ../data/wp
 	$(COMPOSE) up -d
 
 # Stop the services
 down:
 	$(COMPOSE) down
+
+build:
+	$(COMPOSE) build
+
 
 # Rebuild everything
 re:
@@ -20,11 +26,9 @@ re:
 	$(COMPOSE) up -d
 
 rm:
-	$(COMPOSE) down --volumes --remove-orphans
+	$(COMPOSE) down --volumes
 	docker image rm $$(docker images -q) || true
-	rm -rf /Users/adrherna/42/inception/srcs/data/db/*
-	rm -rf /Users/adrherna/42/inception/srcs/data/wp/*
-	rm /Users/adrherna/42/inception/srcs/data/db/.initialized
+	rm -rf ../data
 
 
 # View logs

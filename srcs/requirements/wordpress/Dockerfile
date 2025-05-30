@@ -21,6 +21,7 @@ RUN wget https://wordpress.org/latest.tar.gz && \
 
 RUN mkdir /run/php
 
+COPY config/www.conf /etc/php/7.4/fpm/pool.d/.
 COPY config/init.sh /init.sh
 
 RUN chmod +x /init.sh
