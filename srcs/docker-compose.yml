@@ -1,9 +1,8 @@
-version: '3.8'
 
 services:
   mariadb:
     build: ./requirements/mariadb
-    container_name: mariadb
+    container_name: db
     ports:
       - "3306:3306"
     volumes:
@@ -19,7 +18,7 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    container_name: wordpress
+    container_name: wp
     volumes:
       - wp_data:/var/www/wordpress
     depends_on:
@@ -64,7 +63,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/adrherna/Desktop/Ince_git/data/db
+      device: /Users/adrherna/42/inception/srcs/data/db
 
   wp_data:
     name: "wp_volume"
@@ -72,7 +71,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/adrherna/Desktop/Ince_git/data/wp
+      device: /Users/adrherna/42/inception/srcs/data/wp
 
 networks:
   inception:

@@ -7,9 +7,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy your custom init script
-COPY config/init.sh /init.sh
+COPY config/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY config/entrypoint.sh /entrypoint.sh
-RUN chmod +x /init.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Expose port
 EXPOSE 3306
