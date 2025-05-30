@@ -12,17 +12,15 @@ RUN apt update && apt install -y \
 
 # Create WordPress directory
 
-WORKDIR /var/www/wordpress
+RUN mkdir -p /var/www/html && \
+    mkdir -p /run/php && \
+    chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 
-# Download WordPress
-RUN wget https://wordpress.org/latest.tar.gz && \
-tar -xzf latest.tar.gz --strip-components=1 && \
-rm latest.tar.gz
+WORKDIR /var/www/html
 
 COPY config/www.conf  /etc/php/7.4/fpm/pool.d/
 COPY config/init.sh /init.sh
-
-RUN mkdir /run/php
 
 RUN chmod +x /init.sh
 

@@ -20,7 +20,7 @@ services:
     build: ./requirements/wordpress
     container_name: wp
     volumes:
-      - wp_data:/var/www/wordpress
+      - wp_data:/var/www/html
     depends_on:
       - mariadb
     networks:
@@ -44,7 +44,7 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - wp_data:/var/www/wordpress          # Serve WP files
+      - wp_data:/var/www/html          # Serve WP files
     depends_on:
       - wordpress
       - mariadb

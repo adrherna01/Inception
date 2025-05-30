@@ -8,42 +8,48 @@ chmod +x wp-cli.phar
 if [ ! -f wp-config.php ]; then
   echo "Configuring WordPress..."
 
-./wp-cli.phar core download --allow-root --force
+  ./wp-cli.phar core download --allow-root --force
 
-  echo "block 1"
   ./wp-cli.phar config create \
     --dbname=${DB_NAME} \
     --dbuser=${DB_USER} \
     --dbpass=${DB_PASS} \
     --dbhost=${DB_HOST} \
     --allow-root
-  echo "block 2"
+
   ./wp-cli.phar core install \
-    --url=${DOMAIN_NAME} \
+    --url="https://${DOMAIN_NAME}" \
     --title="Inception" \
     --admin_user=${WP_ADMIN_USER} \
     --admin_password=${WP_ADMIN_PASS} \
     --admin_email=${WP_ADMIN_EMAIL} \
     --allow-root
 
+  ./wp-cli.phar theme install twentytwentyfour --activate --allow-root
+
+  # Update siteurl and home explicitly (like first script)
+  ./wp-cli.phar option update siteurl "https://${DOMAIN_NAME}" --allow-root
+  ./wp-cli.phar option update home "https://${DOMAIN_NAME}" --allow-root
+
+  chown -R www-data:www-data /var/www/html/wp-content
+	chmod -R 0777 /var/www/html/wp-content
+
   # Create additional user (subscriber role like Script 1)
-  echo "block 3"
   ./wp-cli.phar user create \
     ${WP_USER} ${WP_USER_EMAIL} \
     --user_pass=${WP_USER_PASS} \
     --role=subscriber \
     --allow-root
 
-  echo "block 4"
   # Set proper permissions (like Script 1)
-  chown -R www-data:www-data /var/www/wordpress/wp-content
-  chmod -R 775 /var/www/wordpress/wp-content
+  chown -R www-data:www-data /var/www/html/wp-content
+  chmod -R 0777 /var/www/html/wp-content
 
-  echo "block 6"
   # Filesystem method (like Script 1)
-  
   ./wp-cli.phar config set FS_METHOD direct --allow-root
-  ./wp-cli.phar plugin update --all --allow-root
+
+  # Update all plugins (like first script)
+  # ./wp-cli.phar plugin update --all --allow-root
 
   echo "WordPress installation complete with default setup."
 else
