@@ -1,15 +1,13 @@
-COMPOSE=docker-compose
+COMPOSE=docker compose
 
 all: up
 
-up: build
+up:
 	cd srcs && $(COMPOSE) up -d
 
 build:
 	mkdir -p /home/$(USER)/data/db
 	mkdir -p /home/$(USER)/data/wp
-	chmod 777 /home/$(USER)/data/db;
-	chmod 777 /home/$(USER)/data/wb;
 	echo "Directories for MariaDB and Wordpress where created"
 	cd srcs && $(COMPOSE) build
 
@@ -20,11 +18,27 @@ stop:
 	cd srcs && $(COMPOSE) stop
 
 re:
+	cd srcs
 	$(COMPOSE) down
 	$(COMPOSE) up -d
 
+rm:
+	sudo rm  -rf /home/adrherna/data
+	systemctl stop docker
+	systemctl start docker
+
+ls:
+	docker volume ls
+	docker image ls
+	docker network ls
+	docker ps -a
+
+
+stat:
+	systemctl status docker
+
 logs:
-	$(COMPOSE) logs -f
+	cd srcs && $(COMPOSE) logs -f
 
 wp:
 	docker exec -it wp bash
