@@ -20,7 +20,7 @@ services:
     build: ./requirements/wordpress
     container_name: wp
     volumes:
-      - wp_data:/var/www/wordpress
+      - wp_data:/var/www/html
     depends_on:
       - mariadb
     networks:
@@ -44,12 +44,12 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - wp_data:/var/www/wordpress          # Serve WP files
+      - wp_data:/var/www/html
     depends_on:
       - wordpress
       - mariadb
     ports:
-      - "443:443"  # Only expose HTTPS, not HTTP
+      - "443:443"
     networks:
       - inception
     restart: always
@@ -63,7 +63,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/adrherna/Desktop/Ince_git/data/db
+      device: /home/adrherna/data/db
 
   wp_data:
     name: "wp_volume"
@@ -71,7 +71,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/adrherna/Desktop/Ince_git/data/wp
+      device: /home/adrherna/data/db
 
 networks:
   inception:
