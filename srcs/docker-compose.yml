@@ -44,7 +44,7 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - wp_data:/var/www/html
+      - wp_data:/var/www/html 
     depends_on:
       - wordpress
       - mariadb
