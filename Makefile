@@ -22,17 +22,20 @@ re:
 	$(COMPOSE) down
 	$(COMPOSE) up -d
 
-rm:	
+rm:
 	sudo rm  -rf /home/adrherna/data
-	systemctl stop docker 
+	docker rm $(docker ps -aq)
+	docker rmi -f $(docker images -q)
+	docker volume rm $(docker volume ls -q)
+	systemctl stop docker
 	systemctl start docker
 
 ls:
-	docker volume ls 
+	docker volume ls
 	docker image ls
 	docker network ls
 	docker ps -a
-	
+
 
 stat:
 	systemctl status docker
