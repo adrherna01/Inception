@@ -1,6 +1,7 @@
 
 services:
   mariadb:
+    image: mariadb
     build: ./requirements/mariadb
     container_name: db
     ports:
@@ -17,6 +18,7 @@ services:
       ROOT_PASS: ${ROOT_PASS}
 
   wordpress:
+    image: wordpress
     build: ./requirements/wordpress
     container_name: wp
     volumes:
@@ -41,10 +43,11 @@ services:
       - WP_USER_EMAIL=${WP_USER_EMAIL}
 
   nginx:
+    image: nginx
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - wp_data:/var/www/html 
+      - wp_data:/var/www/html
     depends_on:
       - wordpress
       - mariadb
