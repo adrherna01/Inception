@@ -4,8 +4,6 @@ services:
     image: mariadb
     build: ./requirements/mariadb
     container_name: db
-    ports:
-      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:

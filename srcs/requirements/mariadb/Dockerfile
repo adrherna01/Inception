@@ -1,9 +1,10 @@
 FROM debian:bullseye
 
-# Install MariaDB
+# Install MariaD
 RUN apt-get update && \
     apt-get install -y mariadb-server && \
     apt-get clean && \
+     mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy your custom init script
